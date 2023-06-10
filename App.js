@@ -18,12 +18,61 @@ const App = () => {
   return (
     <>
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: '#FFDA00',
+            },
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+            headerTitleAlign: 'center',
+          }}>
           <Stack.Screen
             name="NuevaOrden"
             component={NuevaOrden}
             options={{
               title: 'Nueva Orden',
+            }}
+          />
+
+          <Stack.Screen
+            name="Menu"
+            component={Menu}
+            options={{
+              title: 'Menu',
+            }}
+          />
+
+          <Stack.Screen
+            name="DetallePlatillo"
+            component={DetallePlatillo}
+            options={{
+              title: 'Detalle Platillo',
+            }}
+          />
+
+          <Stack.Screen
+            name="FormularioPlatillo"
+            component={FormularioPlatillo}
+            options={{
+              title: 'Formulario Platillo',
+            }}
+          />
+
+          <Stack.Screen
+            name="ResumenPedido"
+            component={ResumenPedido}
+            options={{
+              title: 'Resumen Pedido',
+            }}
+          />
+
+          <Stack.Screen
+            name="ProgresoPedido"
+            component={ProgresoPedido}
+            options={{
+              title: 'Progreso Pedido',
             }}
           />
         </Stack.Navigator>
