@@ -1,8 +1,17 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import {NativeBaseProvider, Button, Text} from 'native-base';
 
 const NuevaOrden = () => {
-  return <Text>NuevaOrden</Text>;
+  return (
+    <NativeBaseProvider>
+      <View>
+        <Button rounded block>
+          <Text>Crear Nueva Orden</Text>
+        </Button>
+      </View>
+    </NativeBaseProvider>
+  );
 };
 
 export default NuevaOrden;
