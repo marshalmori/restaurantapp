@@ -21,6 +21,11 @@ const FirebaseState = props => {
       type: OBTENER_PRODUCTOS_EXITO,
     });
 
+    // //consultar a firebase
+    // firebase.db.settings({
+    //   experimentalForceLongPolling: true,
+    // });
+
     // consultar firebase
     firebase.db
       .collection('productos')
