@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text} from 'react-native';
 import FirebaseContext from '../context/firebase/firebaseContext';
 
 const Menu = () => {
