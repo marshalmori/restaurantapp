@@ -5,6 +5,8 @@ import FirebaseContext from './firebaseContext';
 
 import {OBTENER_PRODUCTOS_EXITO} from '../../types';
 
+import _ from 'lodash';
+
 const FirebaseState = props => {
   //Crear state inicial
   const initialState = {
@@ -17,10 +19,6 @@ const FirebaseState = props => {
 
   // Función que se ejecuta para traer los productos
   const obtenerProductos = () => {
-    dispatch({
-      type: OBTENER_PRODUCTOS_EXITO,
-    });
-
     // //consultar a firebase
     // firebase.db.settings({
     //   experimentalForceLongPolling: true,
@@ -39,6 +37,8 @@ const FirebaseState = props => {
           ...doc.data(),
         };
       });
+
+      platillos = _.sortBy(platillos, 'categoria');
 
       dispatch({
         type: OBTENER_PRODUCTOS_EXITO,
