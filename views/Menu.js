@@ -1,5 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {View} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 
 import FirebaseContext from '../context/firebase/firebaseContext';
 
@@ -31,8 +31,16 @@ const Menu = () => {
       const categoriaAnterior = menu[i - 1].categoria;
       if (categoriaAnterior !== categoria) {
         return (
-          <Box width="100%" bg="primary.500" p="4" mt="-2" mb="5" shadow={3}>
+          <Box
+            style={styles.separador}
+            width="100%"
+            bg="primary.500"
+            p="2"
+            mt="-2"
+            mb="5"
+            shadow={3}>
             <Text
+              style={styles.separadorTexto}
               fontSize="lg"
               fontWeight="bold"
               color="white"
@@ -44,8 +52,16 @@ const Menu = () => {
       }
     } else {
       return (
-        <Box width="100%" bg="primary.500" p="4" mt="-2" mb="5" shadow={3}>
+        <Box
+          style={styles.separador}
+          width="100%"
+          bg="primary.500"
+          p="2"
+          mt="-2"
+          mb="5"
+          shadow={3}>
           <Text
+            style={styles.separadorTexto}
             fontSize="lg"
             fontWeight="bold"
             color="white"
@@ -123,5 +139,16 @@ const Menu = () => {
     </NativeBaseProvider>
   );
 };
+
+const styles = StyleSheet.create({
+  separador: {
+    backgroundColor: '#000',
+  },
+  separadorTexto: {
+    color: '#FFDA00',
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+  },
+});
 
 export default Menu;
