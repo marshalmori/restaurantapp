@@ -16,6 +16,11 @@ const globalStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000',
   },
+  categoriaTexto: {
+    textTransform: 'uppercase',
+    fontWeight: 'bold',
+    color: '#ccc',
+  },
 });
 
 export default globalStyles;

@@ -1,10 +1,11 @@
 import React, {useContext, useEffect} from 'react';
-import {Pressable, StyleSheet, View, Image} from 'react-native';
+import {View} from 'react-native';
 
 import FirebaseContext from '../context/firebase/firebaseContext';
 
 import globalStyles from '../styles/global';
 import {useNavigation} from '@react-navigation/native';
+
 import {
   NativeBaseProvider,
   FlatList,
@@ -25,15 +26,43 @@ const Menu = () => {
     obtenerProductos();
   }, []);
 
+  const mostrarHeading = (categoria, i) => {
+    if (i > 0) {
+      const categoriaAnterior = menu[i - 1].categoria;
+      if (categoriaAnterior !== categoria) {
+        return (
+          <Box width="100%" bg="primary.500" p="4" mt="-2" mb="5" shadow={3}>
+            <Text
+              fontSize="lg"
+              fontWeight="bold"
+              color="white"
+              textTransform="uppercase">
+              {categoria}
+            </Text>
+          </Box>
+        );
+      }
+    } else {
+      return (
+        <Box width="100%" bg="primary.500" p="4" mt="-2" mb="5" shadow={3}>
+          <Text
+            fontSize="lg"
+            fontWeight="bold"
+            color="white"
+            textTransform="uppercase">
+            {categoria}
+          </Text>
+        </Box>
+      );
+    }
+  };
+
   return (
     <NativeBaseProvider>
       <Box style={globalStyles.contenedor}>
-        <Heading fontSize="xl" p="4" pb="3">
-          Inbox
-        </Heading>
         <FlatList
           data={menu}
-          renderItem={({item}) => (
+          renderItem={({item, index}) => (
             <Box
               borderBottomWidth="1"
               _dark={{
@@ -43,6 +72,7 @@ const Menu = () => {
               pl={['0', '4']}
               pr={['0', '5']}
               py="2">
+              {mostrarHeading(item.categoria, index)}
               <HStack space={[2, 3]} justifyContent="space-between">
                 <Avatar
                   size="55px"
@@ -75,17 +105,15 @@ const Menu = () => {
                     }}>
                     Precio: $ {item.precio}
                   </Text>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: 'warmGray.200',
+                    }}>
+                    {}
+                  </Text>
                 </VStack>
                 <Spacer />
-                <Text
-                  fontSize="xs"
-                  _dark={{
-                    color: 'warmGray.50',
-                  }}
-                  color="coolGray.800"
-                  alignSelf="flex-start">
-                  {item.categoria}
-                </Text>
               </HStack>
             </Box>
           )}
