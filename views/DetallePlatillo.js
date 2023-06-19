@@ -15,7 +15,10 @@ import {
   HStack,
   Image,
   Text,
+  Pressable,
+  Icon,
 } from 'native-base';
+import {useNavigation} from '@react-navigation/native';
 import globalStyles from '../styles/global';
 
 const DetallePlatillo = () => {
@@ -23,12 +26,14 @@ const DetallePlatillo = () => {
   const {platillo} = useContext(PedidosContext);
   const {nombre, imagen, descripcion, precio, categoria} = platillo;
 
+  const navigation = useNavigation();
+
   return (
     <NativeBaseProvider>
-      <Box style={globalStyles.contenedor}>
-        <Heading style={globalStyles.titulo}>
+      <Box style={globalStyles.contenedor} mt="10">
+        {/* <Heading style={globalStyles.titulo}>
           <Text>{nombre}</Text>
-        </Heading>
+        </Heading> */}
         {/* ======= CARD ========= */}
         <Box alignItems="center">
           <Box
@@ -79,46 +84,53 @@ const DetallePlatillo = () => {
             <Stack px="5" mt="40" space={3}>
               <Stack space={2}>
                 <Heading size="md" ml="-1">
-                  The Garden City
+                  {nombre}
                 </Heading>
                 <Text
-                  fontSize="xs"
+                  fontSize="lg"
                   _light={{
                     color: 'violet.500',
                   }}
                   _dark={{
                     color: 'violet.400',
                   }}
-                  fontWeight="500"
+                  fontWeight="900"
                   ml="-0.5"
                   mt="-1">
-                  The Silicon Valley of India.
+                  Precio: $ {precio}
                 </Text>
               </Stack>
-              <Text fontWeight="400">
-                Bengaluru (also called Bangalore) is the center of India's
-                high-tech industry. The city is also known for its parks and
-                nightlife.
+              <Text fontWeight="400" mb="5">
+                {descripcion}
               </Text>
-              <HStack
-                alignItems="center"
-                space={4}
-                justifyContent="space-between">
-                <HStack alignItems="center">
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: 'warmGray.200',
-                    }}
-                    fontWeight="400">
-                    6 mins ago
-                  </Text>
-                </HStack>
-              </HStack>
             </Stack>
           </Box>
         </Box>
         {/* ======= FIM CARD ========= */}
+      </Box>
+
+      <Box
+        bg="white"
+        height="50"
+        width="100%"
+        maxW="100%"
+        alignSelf="center"
+        mb="0">
+        <HStack bg="indigo.600" alignItems="center" safeAreaBottom shadow={6}>
+          <Pressable
+            style={globalStyles.boton}
+            cursor="pointer"
+            // opacity={selected === 0 ? 1 : 0.5}
+            py="4"
+            flex={1}
+            onPress={() => navigation.navigate('FormularioPlatillo')}>
+            <Center>
+              <Text style={globalStyles.botonTexto} color="white" fontSize="15">
+                Ordenar Platillo
+              </Text>
+            </Center>
+          </Pressable>
+        </HStack>
       </Box>
     </NativeBaseProvider>
   );
@@ -127,7 +139,7 @@ const DetallePlatillo = () => {
 const styles = StyleSheet.create({
   flagCategoria: {
     textTransform: 'uppercase',
-    color: '#fff',
+    color: '#FFDA00',
   },
 });
 
