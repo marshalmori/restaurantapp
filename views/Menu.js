@@ -1,8 +1,5 @@
 import React, {useContext, useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
-
-import FirebaseContext from '../context/firebase/firebaseContext';
-
+import {Pressable, StyleSheet} from 'react-native';
 import globalStyles from '../styles/global';
 import {useNavigation} from '@react-navigation/native';
 
@@ -10,7 +7,6 @@ import {
   NativeBaseProvider,
   FlatList,
   Box,
-  Heading,
   Text,
   HStack,
   Avatar,
@@ -18,8 +14,16 @@ import {
   VStack,
 } from 'native-base';
 
+import FirebaseContext from '../context/firebase/firebaseContext';
+import PedidosContext from '../context/pedidos/pedidosContext';
+
 const Menu = () => {
+  //Context de Firebase
   const {menu, obtenerProductos} = useContext(FirebaseContext);
+
+  // Context de Pedido
+  const {seleccionarPlatillo} = useContext(PedidosContext);
+
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -79,59 +83,66 @@ const Menu = () => {
         <FlatList
           data={menu}
           renderItem={({item, index}) => (
-            <Box
-              borderBottomWidth="1"
-              _dark={{
-                borderColor: 'muted.50',
-              }}
-              borderColor="muted.800"
-              pl={['0', '4']}
-              pr={['0', '5']}
-              py="2">
-              {mostrarHeading(item.categoria, index)}
-              <HStack space={[2, 3]} justifyContent="space-between">
-                <Avatar
-                  size="55px"
-                  source={{
-                    uri: item.imagen,
-                  }}
-                />
-                <VStack>
-                  <Text
-                    _dark={{
-                      color: 'warmGray.50',
+            <Pressable
+              onPress={() => {
+                const {existencia, ...item2} = item;
+                seleccionarPlatillo(item2);
+                navigation.navigate('DetallePlatillo');
+              }}>
+              <Box
+                borderBottomWidth="1"
+                _dark={{
+                  borderColor: 'muted.50',
+                }}
+                borderColor="muted.800"
+                pl={['0', '4']}
+                pr={['0', '5']}
+                py="2">
+                {mostrarHeading(item.categoria, index)}
+                <HStack space={[2, 3]} justifyContent="space-between">
+                  <Avatar
+                    size="55px"
+                    source={{
+                      uri: item.imagen,
                     }}
-                    color="coolGray.800"
-                    bold>
-                    {item.nombre}
-                  </Text>
-                  <Text
-                    numberOfLines={2}
-                    color="coolGray.600"
-                    _dark={{
-                      color: 'warmGray.200',
-                    }}>
-                    {item.descripcion}
-                  </Text>
-                  <Text
-                    bold
-                    color="coolGray.900"
-                    _dark={{
-                      color: 'warmGray.50',
-                    }}>
-                    Precio: $ {item.precio}
-                  </Text>
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: 'warmGray.200',
-                    }}>
-                    {}
-                  </Text>
-                </VStack>
-                <Spacer />
-              </HStack>
-            </Box>
+                  />
+                  <VStack>
+                    <Text
+                      _dark={{
+                        color: 'warmGray.50',
+                      }}
+                      color="coolGray.800"
+                      bold>
+                      {item.nombre}
+                    </Text>
+                    <Text
+                      numberOfLines={2}
+                      color="coolGray.600"
+                      _dark={{
+                        color: 'warmGray.200',
+                      }}>
+                      {item.descripcion}
+                    </Text>
+                    <Text
+                      bold
+                      color="coolGray.900"
+                      _dark={{
+                        color: 'warmGray.50',
+                      }}>
+                      Precio: $ {item.precio}
+                    </Text>
+                    <Text
+                      color="coolGray.600"
+                      _dark={{
+                        color: 'warmGray.200',
+                      }}>
+                      {}
+                    </Text>
+                  </VStack>
+                  <Spacer />
+                </HStack>
+              </Box>
+            </Pressable>
           )}
           keyExtractor={item => item.id}
         />

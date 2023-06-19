@@ -21,6 +21,16 @@ const globalStyles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#ccc',
   },
+  titulo: {
+    textAlign: 'center',
+    marginTop: 15,
+    marginBottom: 5,
+    fontSize: 30,
+  },
+  imagen: {
+    height: 300,
+    width: '100%',
+  },
 });
 
 export default globalStyles;
