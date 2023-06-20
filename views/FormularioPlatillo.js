@@ -16,6 +16,7 @@ import {
   Pressable,
   Icon,
   VStack,
+  Input,
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import globalStyles from '../styles/global';
@@ -25,13 +26,30 @@ const FormularioPlatillo = () => {
     <NativeBaseProvider>
       <Box>
         <VStack space={2} alignItems="center">
-          <Text fontSize="2xl" bold>
+          <Text mt="20" fontSize="3xl" bold>
             Cantidad
           </Text>
-          <HStack space={3} justifyContent="center">
-            <Center h="40" w="20" bg="primary.300" rounded="md" shadow={3} />
-            <Center h="40" w="20" bg="primary.500" rounded="md" shadow={3} />
-            <Center h="40" w="20" bg="primary.700" rounded="md" shadow={3} />
+          <HStack space={10} justifyContent="center" mt="10">
+            <Button h="20" w="20" bg="#000" rounded="md" shadow={3}>
+              <Text alignItems="center" color="#fff" fontSize="3xl">
+                +
+              </Text>
+            </Button>
+            <Input
+              h="20"
+              w="20"
+              bg="muted.200"
+              rounded="md"
+              shadow={3}
+              value="1"
+              fontSize="20"
+              textAlign="center"
+            />
+            <Button h="20" w="20" bg="#000" rounded="md" shadow={3}>
+              <Text color="#fff" fontSize="4xl">
+                -
+              </Text>
+            </Button>
           </HStack>
         </VStack>
       </Box>
