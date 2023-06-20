@@ -25,6 +25,18 @@ const FormularioPlatillo = () => {
   // state para cantidades
   const [cantidad, guardarCantidad] = useState(1);
 
+  const incrementarUno = () => {
+    const nuevaCantidad = parseInt(cantidad) + 1;
+    guardarCantidad(nuevaCantidad);
+  };
+
+  const decrementarUno = () => {
+    if (cantidad > 1) {
+      const nuevaCantidad = parseInt(cantidad) - 1;
+      guardarCantidad(nuevaCantidad);
+    }
+  };
+
   return (
     <NativeBaseProvider>
       <Box>
@@ -33,9 +45,15 @@ const FormularioPlatillo = () => {
             Cantidad
           </Text>
           <HStack space={10} justifyContent="center" mt="10">
-            <Button h="20" w="20" bg="#000" rounded="md" shadow={3}>
+            <Button
+              h="20"
+              w="20"
+              bg="#000"
+              rounded="md"
+              shadow={3}
+              onPress={() => decrementarUno()}>
               <Text alignItems="center" color="#fff" fontSize="3xl">
-                +
+                -
               </Text>
             </Button>
             <Input
@@ -50,9 +68,15 @@ const FormularioPlatillo = () => {
               keyboardType="numeric"
               onChangeText={cantidad => guardarCantidad(cantidad)}
             />
-            <Button h="20" w="20" bg="#000" rounded="md" shadow={3}>
+            <Button
+              h="20"
+              w="20"
+              bg="#000"
+              rounded="md"
+              shadow={3}
+              onPress={() => incrementarUno()}>
               <Text color="#fff" fontSize="4xl">
-                -
+                +
               </Text>
             </Button>
           </HStack>
