@@ -5,8 +5,6 @@ import {
   NativeBaseProvider,
   Container,
   Box,
-  Footer,
-  FooterTab,
   Button,
   Heading,
   AspectRatio,

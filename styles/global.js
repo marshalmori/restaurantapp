@@ -25,7 +25,7 @@ const globalStyles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 15,
     marginBottom: 5,
-    fontSize: 30,
+    fontSize: 25,
   },
   imagen: {
     height: 300,
