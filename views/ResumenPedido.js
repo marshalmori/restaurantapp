@@ -12,13 +12,31 @@ import {
   Avatar,
   Spacer,
   Center,
+  Container,
+  Button,
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import globalStyles from '../styles/global';
 
 const ResumenPedido = () => {
   // context de pedido
-  const {pedido} = useContext(PedidosContext);
+  const {pedido, total, mostrarResumen} = useContext(PedidosContext);
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    calcularTotal();
+  }, [pedido]);
+
+  const calcularTotal = () => {
+    let nuevoTotal = 0;
+    nuevoTotal = pedido.reduce(
+      (nuevoTotal, articulo) => nuevoTotal + articulo.total,
+      0,
+    );
+
+    mostrarResumen(nuevoTotal);
+  };
 
   return (
     <NativeBaseProvider>
@@ -86,16 +104,40 @@ const ResumenPedido = () => {
                   <Spacer />
                 </HStack>
               </Box>
-              <VStack mt="4" space={4} alignItems="center">
-                <Text fontSize="xl" bold>
-                  Total a pagar: $
-                </Text>
-              </VStack>
             </Pressable>
           )}
           keyExtractor={item => item.id}
         />
       </Box>
+
+      <VStack mb="4" space={2} alignItems="center">
+        <Text
+          alignContent="center"
+          px={60}
+          py={2}
+          alignItems="center"
+          w="64"
+          h="10"
+          _dark={{
+            bg: '#000',
+          }}
+          _light={{
+            bg: '#000',
+          }}
+          rounded="md"
+          shadow={3}
+          color="#fff"
+          bold>
+          Total a pagar: $ {total}
+        </Text>
+      </VStack>
+      <Button mt="10" onPress={() => navigation.navigate('Menu')}>
+        Seguir Pidiendo
+      </Button>
+
+      <Button mt="40" onPress={() => navigation.navigate('ProgresoPedido')}>
+        Ordenar Pedido
+      </Button>
     </NativeBaseProvider>
   );
 };
