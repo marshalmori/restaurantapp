@@ -27,8 +27,10 @@ const FormularioPlatillo = () => {
   const [total, guardarTotal] = useState(0);
 
   //Context
-  const {platillo} = useContext(PedidosContext);
+  const {platillo, guardarPedido} = useContext(PedidosContext);
   const {precio} = platillo;
+
+  const navigation = useNavigation();
 
   // En cuanto el componente carga, calcular la cantidad a pagar
   useEffect(() => {
@@ -63,7 +65,15 @@ const FormularioPlatillo = () => {
           text: 'Confirmar',
           onPress: () => {
             // Almacenar el pedido al pedido principal
+            const pedido = {
+              ...platillo,
+              cantidad,
+              total,
+            };
+            guardarPedido(pedido);
+
             // Navegar hacia el Resumen
+            navigation.navigate('ResumenPedido');
           },
         },
         {
@@ -133,8 +143,9 @@ const FormularioPlatillo = () => {
         width="100%"
         maxW="100%"
         alignSelf="center"
-        mb="0">
-        <HStack bg="indigo.600" alignItems="center" safeAreaBottom shadow={6}>
+        mb="0"
+        mt="80">
+        <HStack alignItems="center" safeAreaBottom shadow={6}>
           <Pressable
             style={globalStyles.boton}
             cursor="pointer"
