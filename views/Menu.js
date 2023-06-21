@@ -12,6 +12,7 @@ import {
   Avatar,
   Spacer,
   VStack,
+  Center,
 } from 'native-base';
 
 import FirebaseContext from '../context/firebase/firebaseContext';
@@ -101,6 +102,7 @@ const Menu = () => {
                 {mostrarHeading(item.categoria, index)}
                 <HStack space={[2, 3]} justifyContent="space-between">
                   <Avatar
+                    ml="3"
                     size="55px"
                     source={{
                       uri: item.imagen,
