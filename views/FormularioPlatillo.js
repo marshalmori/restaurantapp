@@ -1,5 +1,5 @@
 import React, {useContext, useState, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, Alert} from 'react-native';
 import PedidosContext from '../context/pedidos/pedidosContext';
 import {
   NativeBaseProvider,
@@ -53,6 +53,27 @@ const FormularioPlatillo = () => {
     }
   };
 
+  // Confirma si la orden es correcta
+  const confirmarOrden = () => {
+    Alert.alert(
+      'Deseas confirmar tu pedido?',
+      'Un pedido confirmado ya no se podrá modificar',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => {
+            // Almacenar el pedido al pedido principal
+            // Navegar hacia el Resumen
+          },
+        },
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+      ],
+    );
+  };
+
   return (
     <NativeBaseProvider>
       <Box>
@@ -103,6 +124,31 @@ const FormularioPlatillo = () => {
             </Text>
           </HStack>
         </VStack>
+      </Box>
+
+      {/* -------- FOOTER ------ */}
+      <Box
+        bg="white"
+        height="50"
+        width="100%"
+        maxW="100%"
+        alignSelf="center"
+        mb="0">
+        <HStack bg="indigo.600" alignItems="center" safeAreaBottom shadow={6}>
+          <Pressable
+            style={globalStyles.boton}
+            cursor="pointer"
+            // opacity={selected === 0 ? 1 : 0.5}
+            py="4"
+            flex={1}
+            onPress={() => confirmarOrden()}>
+            <Center>
+              <Text style={globalStyles.botonTexto} color="white" fontSize="15">
+                Agregar al pedido
+              </Text>
+            </Center>
+          </Pressable>
+        </HStack>
       </Box>
     </NativeBaseProvider>
   );
