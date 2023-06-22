@@ -1,6 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {StyleSheet, Alert} from 'react-native';
 import PedidosContext from '../context/pedidos/pedidosContext';
+import firebase from '../firebase';
 import {
   NativeBaseProvider,
   Box,
@@ -47,7 +48,25 @@ const ResumenPedido = () => {
       [
         {
           text: 'Confirmar',
-          onPress: () => {
+          onPress: async () => {
+            // crear un objeto
+            const pedidoObj = {
+              tiempoentrega: 0,
+              completado: false,
+              total: Number(total),
+              orden: pedido,
+              creado: Date.now(),
+            };
+
+            // escribir el pedido em firebase
+            try {
+              const pedido = await firebase.db
+                .collection('ordenes')
+                .add(pedidoObj);
+            } catch (error) {
+              console.log(error);
+            }
+
             navigation.navigate('ProgresoPedido');
           },
         },
