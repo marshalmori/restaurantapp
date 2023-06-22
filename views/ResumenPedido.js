@@ -38,6 +38,26 @@ const ResumenPedido = () => {
     mostrarResumen(nuevoTotal);
   };
 
+  // redirecciona a Progreso de Pedido
+  const progresoPedido = () => {
+    Alert.alert(
+      'Revisa tu pedido',
+      'Una vez que realizas tu pedido, no podrás cambiarlo',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => {
+            navigation.navigate('ProgresoPedido');
+          },
+        },
+        {
+          text: 'Revisar',
+          style: 'cancel',
+        },
+      ],
+    );
+  };
+
   return (
     <NativeBaseProvider>
       <Box style={globalStyles.contenedor}>
@@ -135,7 +155,7 @@ const ResumenPedido = () => {
         Seguir Pidiendo
       </Button>
 
-      <Button mt="40" onPress={() => navigation.navigate('ProgresoPedido')}>
+      <Button mt="40" onPress={() => progresoPedido()}>
         Ordenar Pedido
       </Button>
     </NativeBaseProvider>
