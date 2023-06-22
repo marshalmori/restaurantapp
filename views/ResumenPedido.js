@@ -20,7 +20,8 @@ import globalStyles from '../styles/global';
 
 const ResumenPedido = () => {
   // context de pedido
-  const {pedido, total, mostrarResumen} = useContext(PedidosContext);
+  const {pedido, total, mostrarResumen, eliminarProducto} =
+    useContext(PedidosContext);
 
   const navigation = useNavigation();
 
@@ -52,6 +53,26 @@ const ResumenPedido = () => {
         },
         {
           text: 'Revisar',
+          style: 'cancel',
+        },
+      ],
+    );
+  };
+
+  // Elimina un producto del arreglo de pedido
+  const confirmarEliminacion = id => {
+    Alert.alert(
+      'Deseas eliminar este artículo?',
+      'Una vez eliminado no se puede recuperar',
+      [
+        {
+          text: 'Confirmar',
+          onPress: () => {
+            eliminarProducto(id);
+          },
+        },
+        {
+          text: 'Cancelar',
           style: 'cancel',
         },
       ],
@@ -120,6 +141,19 @@ const ResumenPedido = () => {
                       }}>
                       {}
                     </Text>
+                  </VStack>
+                  <VStack>
+                    <Button
+                      onPress={() => confirmarEliminacion(item.id)}
+                      space={4}
+                      alignItems="center"
+                      bg="danger.500"
+                      ml={10}
+                      mt={3}>
+                      <Text color="#fff" bold>
+                        Eliminar
+                      </Text>
+                    </Button>
                   </VStack>
                   <Spacer />
                 </HStack>
