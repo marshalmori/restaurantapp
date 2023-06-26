@@ -12,6 +12,7 @@ const ProgresoPedido = () => {
   const {idpedido} = useContext(PedidosContext);
 
   const [tiempo, guardarTiempo] = useState(0);
+  const [completado, guardarCompletado] = useState(false);
 
   useEffect(() => {
     obtenerProducto();
@@ -21,6 +22,7 @@ const ProgresoPedido = () => {
     const docRef = doc(firebase.db, 'ordenes', idpedido);
     const docSnap = await getDoc(docRef);
     guardarTiempo(docSnap.data().tiempoentrega);
+    guardarCompletado(docSnap.data().completado);
   };
 
   // Muestra el countdown en la pantalla
@@ -49,7 +51,7 @@ const ProgresoPedido = () => {
             </>
           )}
 
-          {tiempo > 0 && (
+          {!completado && tiempo > 0 && (
             <>
               <Text style={{textAlign: 'center'}}>
                 Su orden estará lista en:
@@ -60,6 +62,19 @@ const ProgresoPedido = () => {
                   renderer={renderer}
                 />
               </Text>
+            </>
+          )}
+
+          {completado && (
+            <>
+              <Text style={styles.textoCompletado}>Orden Lista</Text>
+              <Text style={styles.textoCompletado}>
+                Por favor, pase a recoger su pedido
+              </Text>
+
+              <Button>
+                <Text>Comenzar Una Orden Nueva</Text>
+              </Button>
             </>
           )}
         </View>
@@ -74,6 +89,11 @@ const styles = StyleSheet.create({
     fontSize: 60,
     textAlign: 'center',
     marginTop: 30,
+  },
+  textoCompletado: {
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    marginBottom: 20,
   },
 });
 
