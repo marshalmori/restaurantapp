@@ -9,6 +9,8 @@ import {doc, getDoc} from 'firebase/firestore';
 import Countdown from 'react-countdown';
 
 const ProgresoPedido = () => {
+  const navigation = useNavigation();
+
   const {idpedido} = useContext(PedidosContext);
 
   const [tiempo, guardarTiempo] = useState(0);
@@ -72,8 +74,14 @@ const ProgresoPedido = () => {
                 Por favor, pase a recoger su pedido
               </Text>
 
-              <Button>
-                <Text>Comenzar Una Orden Nueva</Text>
+              <Button
+                style={[globalStyles.boton, {marginTop: 100}]}
+                rounded
+                block
+                onPress={() => navigation.navigate('NuevaOrden')}>
+                <Text style={globalStyles.botonTexto}>
+                  Comenzar Una Orden Nueva
+                </Text>
               </Button>
             </>
           )}
