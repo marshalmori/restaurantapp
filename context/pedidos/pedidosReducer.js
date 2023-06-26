@@ -3,6 +3,7 @@ import {
   CONFIRMAR_ORDENAR_PLATILLO,
   MOSTRAR_RESUMEN,
   ELIMINAR_PRODUCTO,
+  PEDIDO_ORDENADO,
 } from '../../types';
 
 export default (state, action) => {
@@ -26,6 +27,11 @@ export default (state, action) => {
       return {
         ...state,
         pedido: state.pedido.filter(articulo => articulo.id !== action.payload),
+      };
+    case PEDIDO_ORDENADO:
+      return {
+        ...state,
+        idpedido: action.payload,
       };
     default:
       return state;

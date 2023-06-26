@@ -21,7 +21,7 @@ import globalStyles from '../styles/global';
 
 const ResumenPedido = () => {
   // context de pedido
-  const {pedido, total, mostrarResumen, eliminarProducto} =
+  const {pedido, total, mostrarResumen, eliminarProducto, pedidoRealizado} =
     useContext(PedidosContext);
 
   const navigation = useNavigation();
@@ -63,11 +63,11 @@ const ResumenPedido = () => {
               const pedido = await firebase.db
                 .collection('ordenes')
                 .add(pedidoObj);
+              pedidoRealizado(pedido.id);
+              navigation.navigate('ProgresoPedido');
             } catch (error) {
               console.log(error);
             }
-
-            navigation.navigate('ProgresoPedido');
           },
         },
         {
